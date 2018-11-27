@@ -1,0 +1,33 @@
+package charp15fileIO.nio;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.CharBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+
+public class FileChannelTest {
+	public static void main(String[] args) throws IOException {
+		File f = new File("src/charp15fileIO/nio/FileChannelTest.java");
+		
+		FileChannel fileChannel = new FileInputStream(f).getChannel();//创建 channel
+		FileChannel outChannel = new FileOutputStream("src/charp15fileIO/nio/channel.txt").getChannel();
+		
+		MappedByteBuffer map = fileChannel.map(MapMode.READ_ONLY, 0, f.length());
+		outChannel.write(map);
+		
+		map.clear();
+		
+		Charset charset = Charset.forName("utf-8");
+		CharsetDecoder decoder = charset.newDecoder();// 解码器
+		CharBuffer charBuffer = decoder.decode(map);
+		System.out.println(charBuffer);
+		
+	}
+}
