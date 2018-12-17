@@ -5,7 +5,13 @@ import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
-
+/**
+ * 
+ * @ClassName:  RandomFileChannelTest   
+ * @Description:RandomFileChannelTest.channel 的读写 取决于 RandomFile的创建是的 模式。
+ * @author: 谢洪伟 
+ * @date:   2018年12月12日 下午4:24:32
+ */
 public class RandomFileChannelTest {
 	public static void main(String[] args) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile("src/charp15fileIO/nio/random.txt", "rw");
